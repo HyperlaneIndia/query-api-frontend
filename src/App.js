@@ -49,8 +49,6 @@ function App() {
     return signer;
   };
 
-
-
   const contractCall = async () => {
     if (provider !== null) {
       // To be implemented by me
@@ -60,10 +58,43 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <button onClick={connectWallet}>Connect Wallet</button>
-      <p>{wallet}</p>
-      <button onClick={contractCall}>Call Contract</button>
+    <div classNameName="App">
+      <div className="grid px-4 py-24 h-screen bg-blue-900 sm:px-6 lg:px-8 place-items-center">
+        <div className="relative w-full max-w-xl mx-auto overflow-hidden bg-white rounded-xl">
+          <div className="p-6 sm:p-8">
+            <div className="mt-0 space-y-6 sm:mt-1">
+              <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-1">
+                <div className="overflow-hidden transition-all duration-200 bg-white border border-gray-900 cursor-pointer rounded-xl hover:bg-gray-50">
+                  {wallet ? (
+                    <div className="px-4 py-5">
+                      <p className=" text-sm font-bold text-gray-900">
+                        {wallet}
+                      </p>
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
+                </div>
+              </div>
+
+              <button
+                onClick={connectWallet}
+                type="button"
+                className="inline-flex items-center justify-center w-full px-6 py-4 text-xs font-bold tracking-widest text-white uppercase transition-all duration-200 bg-gray-900 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-700"
+              >
+                Connect Wallet
+              </button>
+              <button
+                onClick={contractCall}
+                type="button"
+                className="inline-flex items-center justify-center w-full px-6 py-4 text-xs font-bold tracking-widest text-white uppercase transition-all duration-200 bg-green-900 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-900 hover:bg-green-700"
+              >
+                Call Contract
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
