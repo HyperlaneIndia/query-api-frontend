@@ -7,11 +7,13 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
+import { fetchContract } from "./utils/contracts";
 
 function App() {
   const [wallet, setWallet] = useState();
   const [provider, setProvider] = useState();
   const [contract, setContract] = useState();
+  const [proposalId, setProposalId] = useState(1);
   /**
    * Function to connect the wallet
    * When the wallet is connected, the wallet address is set to the state along with provider
@@ -51,9 +53,19 @@ function App() {
 
   const contractCall = async () => {
     if (provider !== null) {
-      // To be implemented by me
-      // get contract
-      // call the contract function
+      const signer = await getSigner();
+      const getContract = await fetchContract(signer);
+      await getContract
+        .fetchVotes(proposalId, { value: ethers.parseEther("0.01") })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Insufficient balance");
+        });
+    } else {
+      alert("Connect wallet first");
     }
   };
 
